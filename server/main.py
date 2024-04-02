@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from routers import secure, public, users, blogs
+from routers import public, users, blogs
 from auth import get_user
 from db import metadata, database, engine
 from contextlib import asynccontextmanager
@@ -17,11 +17,6 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(
     public.router,
     prefix="/blog"
-)
-app.include_router(
-    secure.router,
-    prefix="/blog/secure",
-    dependencies=[Depends(get_user)]
 )
 
 app.include_router(
