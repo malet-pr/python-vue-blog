@@ -1,2 +1,6 @@
 .env
 env/
+server/__pycache__
+server/routers/__pycache__
+server/users/__pycache__
+server/blogs/__pycache__
