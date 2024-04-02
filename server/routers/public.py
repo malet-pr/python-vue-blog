@@ -5,10 +5,6 @@ import api_key
 
 router = APIRouter()
 
-@router.get("/")
-async def get_testroute():
-    return "OK"
-
 @router.post("/login")
 async def login(payload: UserIn):
     user = payload.model_dump(exclude_unset=True)
