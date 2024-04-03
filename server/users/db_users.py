@@ -8,6 +8,13 @@ async def user_exists(email: str, password: str):
         return True
     return False
 
+async def email_exists(email: str):
+    query = users.select().where(users.c.email == email)
+    data = await database.execute(query=query)
+    if(data != None):
+        return True
+    return False
+
 async def add_user(payload: UserIn):
     query = users.insert().values(**payload.model_dump())
     return await database.execute(query=query)
