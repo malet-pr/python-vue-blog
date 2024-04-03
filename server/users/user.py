@@ -13,9 +13,9 @@ class UserUpdate(UserIn):
     password: Optional[str] = None
 
 class UserDetailsIn(BaseModel):
-    first_name: str
-    middle_name: str
-    last_name: str
+    first_name: Optional[str] = None
+    middle_name: Optional[str] = None
+    last_name: Optional[str] = None
     
 class UserDetailsOut(UserDetailsIn):
     user_id: int 

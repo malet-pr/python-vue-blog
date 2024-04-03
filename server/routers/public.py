@@ -1,5 +1,5 @@
 from fastapi import Header, APIRouter, HTTPException, status
-from users.user import UserIn, UserOut
+from users.user import UserIn, UserDetailsIn
 import users.db_users
 import api_key
 from sqlalchemy import exc
@@ -23,8 +23,9 @@ async def login(payload: UserIn):
 @router.post("/user", status_code=201)
 async def add_user(payload: UserIn):
     new_user = payload.model_dump(exclude_unset=True)
+    if not new_user['email'] or not new_user['password'] :
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Email and password cannot be empty")
     db_user = await users.db_users.email_exists(new_user['email'])
-    print(db_user)
     if db_user:
         raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="The email is already in use.")
     try:
