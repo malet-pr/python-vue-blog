@@ -1,7 +1,8 @@
 from typing import List
-from fastapi import Header, APIRouter, HTTPException
+from fastapi import Header, APIRouter, HTTPException, status
 from users.user import UserIn, UserOut, UserUpdate, UserDetailsIn, UserDetailsOut, UserDetailsUpdate
 import users.db_users
+from sqlalchemy import exc
 
 router = APIRouter()
 
@@ -11,10 +12,6 @@ async def get_all_users():
 
 @router.get('/user/{id}')
 async def get_user(id: int):
-    pass
-
-@router.post("/user")
-async def add_user(payload: UserIn):
     pass
 
 @router.put('/user/{id}')
