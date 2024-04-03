@@ -12,7 +12,7 @@ async def get_all_users():
 
 @router.get('/user/{id}')
 async def get_user(id: int):
-    pass
+    return await users.db_users.get_user(id)
 
 @router.put('/user/{id}')
 async def replace_user(id: int, payload: UserIn):
@@ -26,13 +26,14 @@ async def update_user(id: int, payload: UserUpdate):
 async def delete_user(id: int):
     pass
 
+## esta ruta debería estar disponible sólo para administradores
 @router.get("/user/details/", response_model=List[UserDetailsOut])
 async def get_all_users_details():
-    pass
+    return await users.db_users.get_all_users_details()
 
 @router.get('/user/details/{id}')
 async def get_user_details(id: int):
-    pass
+    return await users.db_users.get_user_details(id)
 
 @router.post("/user/details/")
 async def add_user_details(payload: UserDetailsIn):
